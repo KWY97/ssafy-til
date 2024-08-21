@@ -37,7 +37,7 @@
     1개 - 공통
 
 
-- box-sizing 속성
+- box-sizing 속성 (!!시험 나올 삘!!)
 표준 상자 모델에서 width와 height 속성 값을 설정하면 이 값은 !!content box!!의 크기를 조정하게 됨
 그렇기 때문에 테두리를 기준으로 width와 height를 설정하게 하려면 따로 box-sizing을 border-box로 선언해줘야함
 (기본값은 box-sizing: content-box임)

@@ -9,7 +9,7 @@ display, position, flexbox 등
 
   이동 방향은 5개가 있다. (top, bottom, left, right, Z축 - 우리 얼굴 방향 (요소가 같은 위치에서 겹칠 때를 대비))
 
-  - 유형
+  - 유형 (!! 기억 잘 해야 할 듯!!)
   1. static
     요소를 Normal Flow에 따라 배치
     top, right, bottom, left 속성이 적용되지 않음
