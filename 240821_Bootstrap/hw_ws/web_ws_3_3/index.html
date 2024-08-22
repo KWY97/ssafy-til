@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+      .block_red {
+        background-color: red;
+        width: 370px;
+      }
+
+      .block_green {
+        background-color: green;
+        width: 330px
+      }
+
+
+    </style>
+
+  </head>
+  <body>
+      <div class="block_red p-3 mb-2 text-white rounded-2">Invalid Login or password</div>
+      <div class="card-header bg-white fw-bold" style="font-size: 30px;">
+        SSAFY 전용 Gitlab 시스템
+      </div>
+      <div class="card" style="width: 370px;">
+        <div class="card-header fw-bold bg-white">Sign in</div>
+        <div class="card-body"> <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label fw-bold">Username or Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label fw-bold">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Remeber me</label>
+          <span style="color: blue; text-align: end; margin-left: 40px;">Forgot your password?</span>
+        </div>
+        <div class="block_green p-3 mb-4 text-white rounded-2 text-center">Sign</div>
+      </div>
+
+      </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
