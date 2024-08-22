@@ -1,7 +1,6 @@
 <CSS Layout>
 각 요소의 위치와 크기를 조정하여 웹 페이지의 디자인을 결정하는 것
 display, position, flexbox 등
-(flex box가 가장 최근기술. 하지만 서로 상호보완적으로 필요하다. 최신기술이라고 모든 것을 대응할 수 없음)
 
 - CSS position
   - 요소를 Normal Flow에서 제거하여 다른 위치로 배치하는 것
