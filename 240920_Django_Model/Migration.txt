@@ -1,0 +1,42 @@
+<Migrations>
+ - model 클래스의 변경사항(필드 생성, 수정, 삭제 등)을 DB에 최종 반영하는 방법
+
+ !!! Migration 과정 !!! 
+ - 우리가 만든 class는 설계도 초안 이다. (스케치)
+ - 장고가 makemigrations 명령어를 통해 최종 설계도(migration 파일)를 만들어줌 (개발자가 하는 것이 아님)
+ - DB는 migrate 명령어를 통해 migration 파일을 전달 받음
+
+ *) 스케치(개발자가 함) -> makemigrations 을 통해 migration 파일 생성 -> migrate를 통해 DB가 migration 파일 전달 받음
+
+ !!! 아주 중요 !!! 핵심 명령어
+  python manage.py makemigrations: model class를 기반으로 최종 설계도(migration) 작성
+  python manage.py migrate: 최종 설계도를 DB에 전달하여 반영
+
+  *) 참고: 내장 앱들의 설계도도 같이 migrate 된다. (우리는 우리가 만든 것만 신경쓰면 된다.)
+           그래서 첫 migrate 시 출력 내용이 많은 것임.
+
+ - 추가 모델 필드 작성
+  !!! 시험삘 !!! - 2개 구분 잘하기
+  auto_now: 데이터가 저장될 때마다 자동으로 현재 날짜시간을 저장 (수정일 쓰기 좋음)
+  auto_now_add: 데이터가 처음 생성될 때만 자동으로 현재 날짜시간을 저장 (작성일 쓰기 좋음)
+  !!! !!!
+
+
+  추가 모델 필드 작성 후 makemigrations하면 선택 옵션이 2가지 뜸
+
+  이미 기존 테이블이 존재하기 때문에 필드를 추가 할 때 필드의 '기본 값 설정'이 필요
+  1) Provide a one-off default now which will be set on all existing rows.
+  현재 대화를 유지하면서 직접 기본 값을 입력하는 방법
+
+  2) Quit and manually define a default value in models.py.
+  현재 대화에서 나간 후 models.py에 기본 값 관련 설정을 하는 방법
+
+  1번 선택 후 아무것도 입력하지 않고 enter 누르면 Django가 제안하는 기본 값으로 설정 됨
+  (웬만하면 1번 선택 후 장고 추천 기본 값 받는게 원만하다.)
+
+최종 정리
+
+ model class에 변경사항(1)이 생겼다면, 반드시 새로운 설계도를 생성(2)하고, 이를 DB에 반영(3)해야 한다.
+ 1. model class 변경 -> 2. makemigrations -> 3. migrate
+
+ 이 모든 과정을 migrations라고 한다.
