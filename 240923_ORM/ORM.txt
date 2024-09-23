@@ -35,3 +35,93 @@
 <CRUD>
  - 소프트웨어가 가지는 기본적인 데이터 처리 기능
   1. Create(저장), 2. Read(조회), 3. Update(갱신), 4. Delete(삭제)
+
+<QuerySet API 실습 사전 준비>
+- 외부 라이브러리 설치 및 설정
+ pip install ipython django_extensions
+ (2개 이상 pip 다운받을 때 공백을 두고 입력하면 동시에 다운 가능)
+ *) django_extensions같은 경우는 settings에 django_extensions 등록 해줘야 쓸 수 있다.
+
+shell 환경이 있어야 Article.Object.all()을 바로바로 볼 수 있음
+python manage.py shell_plus 해주면 됨 (그 전에 django_extensions를 settings.py에 등록해야 댐)
+Django환경 안에서 실행되는 python shell (입력하는 QuerySet API 구문이 Django 프로젝트에 영향을 미침)
+
+ - Create (23p ~ 28p)
+  - 데이터 객체를 만드는 3가지 방법 (23p ~ 28p)
+   1. 인스턴스만들고 인스턴스 변수활용하기 (23~25p)
+   2. 인스턴스 생성시 다 지정해주기 (26p)
+   3. QuerySet API 중 create() 메서드 활용 (27p)
+
+   위 3가지는 작성하는 방법이다. 작성 후 저장(28p)이 필수 !! 그래야 DB에 저장이 되는 것
+   1, 2번 방법은 save메서드를 호출해야 비로소 DB에 데이터가 저장된다.
+   그런데 3번 방법은 2가지 방법과 달리 save메서드를 호출하지 않아도 바로 생선된 데이터가 반환된다.
+   aricle.save()후 aricle을 쳐보면 Article: Article object(num)이 뜨는데 num은 id, pk(primary key)이다.
+   저장될 때 생긴 것인데 article.id 써서 확인하기보다 !!! article.pk를 써서 번호를 확인하는 것이 좋다 ! (django에서도 권장) !!!
+   (!!! 하지만 테이블에 실제로는 id라는 이름으로 저장돼있음을 알아야한다. !!!)
+
+   *) 인스턴스.save()
+    - 객체를 DB에 저장하는 인스턴스 메서드
+
+ - Read (29p ~ 34p)
+  1. Return new QuerySets 
+   - 무조건 QuerySet을 반환함. 값이 하나라도 !!! 쿼리셋 형태로 준다. !!!
+
+   - all()
+    - 전체 데이터 조회 (Article.objects.all())
+
+   - filter()
+    - 주어진 매개변수와 일치하는 객체를 포함하는 QuerySet 반환 
+    *) 무조건 QuerySet을 반환 (filter에 일치하는게 없으면 빈 쿼리셋 반환)
+
+      우리 실습한 코드 기준 실행 및 결과
+
+      (Article.objects.filter(content='django!')) 
+      -> <QuerySet [<Article: Article object (1)>, <Article: Article object (2)>, <Article: Article object (3)>]>
+      
+      (Article.objects.filter(title='abc')) -> <QuerySet []>
+
+      (Article.objects.filter(title='second')) -> <QuerySet [<Article: Article object (2)>]>
+
+      filter에 걸리는 조건이 복수면 and 조건으로 걸리게 된다
+      (Article.objects.filter(title='first', content='django!')) -> <QuerySet [<Article: Article object (1)>]>
+
+  2. Do not return QuerySets
+   - get()
+    - 주어진 매개변수와 일치하는 'instance(객체)'를 반환
+     - 1. filter와 달리 조건에 맞지 않는 것을 조회하면 예외 발생 (DoesNotExist)
+     - 2. instance(객체 한개)만 조회하기 때문에 조건에 맞는 것이 여러개가 있으면 예외 발생 (MultipleObjectsReturned)
+     
+     - 위 2가지 특징 때문에 get()은 pk와 같이 고유성을 보장하는 조회에서 사용해야 함
+      (Article.objects.get(pk=1)) -> <Article: Article object (1)>
+      (Article.objects.get(pk=5)) -> DoesNotExist: Article matching query does not exist.
+      (Article.objects.get(content='django!')) -> MultipleObjectsReturned: get() returned more than one Article -- it returned 3!
+
+ - Update (35p ~ 36p)
+  인스턴스 변수를 변경 후 !!! save 메서드 호출 !!!
+  (수정할 인스턴스 조회, 인스턴스 변수를 변경, 저장, 끝 ~~~)
+
+ - Delete (37p ~ 38p)
+  삭제하려는 데이터 조회 후 delete 메서드 호출
+  (article.delete())
+  (삭제할 인스턴스 조회, delete 메서드 호출, 끝 ~~~)
+  *) django는 지워진 pk를 다시 사용하지 않는다. 한 번 지워지면 끝 번호가 재활용되지 않음
+
+
+<참고>
+<Field lookups> (48p ~ 49p)
+ - Query에서 조건을 구성하는 방법
+ - QuerySet 메서드 filter(), exclude() 및 get()에 대한 키워드 인자로 지정됨
+ - 외우는 것 아니고 필요한 것만 공식문서에서 찾아쓰면 된다.
+ - django queryset API 들어가면 된다.
+ 
+ - 교재에 나와 있는 것: contains, startswith
+ - 그나마 쓸만한 것 (강사님 추천): gt, gte, lt, lte (초과, 이상, 미만, 이하)
+
+
+<ORM, QuerySet API를 사용하는 이유>
+ 1. 데이터베이스 추상화
+  - 개발자는 특정 데이터베이스 시스템에 종속되지 않고 일관된 방식으로 데이터를 다룰 수 있음
+ 2. 생산성 향상
+  - 복잡한 SQL 쿼리를 직접 작성하는 대신 Python 코드로 데이터베이스 작업을 수행할 수 있음
+ 3. 객체 지향적 접근
+  - 데이터베이스 테이블을 Python 객체로 다룰 수 있어 객체 지향 프로그래밍의 이점을 활용할 수 있음
