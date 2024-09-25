@@ -1,0 +1,12 @@
+<HTTP 요청 다루기>
+ new & create view 함수간 공통점과 차이점
+
+ 공통점: CRUD의 C(생성)를 구현하기 위한 것
+ 차이점: new는 GET method(조회) 요청만을 처리, create는 POST method(생성) 요청만을 처리
+
+ 요청 method가 GET이면 new로 처리, POST면 create로 처리하면 되겠구나 !
+ 조건문을 활용해 new & create 2개의 view 함수를 하나로 구조화
+
+ 똑같은 원리로 edit & update 2개의 view 함수도 하나로 구조화 가능
+
+ 교재 실습: (49p~64p)
