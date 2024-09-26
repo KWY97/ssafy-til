@@ -6,12 +6,12 @@
   Media Files을 제공하기 전 준비사항 (장고 공식문서에 나와 있음. 외울게 아니라고 함)
   공식문서: https://docs.djangoproject.com/en/5.1/howto/static-files/
   (목차: 'Serving files uploaded by a user during development' 이거 보면댐)
-  (MEDIA_URL, MEDIA_ROOT 작성해두고 공식문서에서 코드 복붙해서 쓰면된다.)
+  (MEDIA_ROOT, MEDIA_URL 작성해두고 공식문서에서 코드 복붙해서 쓰면된다.)
 
    1. settings.py에 MEDIA_ROOT, MEDIA_URL 설정
     - MEDIA_ROOT
       미디어 파일들이 위치하는 디렉토리의 절대 경로
-      (EDIA_ROOT = BASE_DIR / 'media')
+      (MEDIA_ROOT = BASE_DIR / 'media')
 
     - MEDIA_URL
       MEDIA_ROOT에서 제공되는 미디어 파일에 대한 주소를 생성
