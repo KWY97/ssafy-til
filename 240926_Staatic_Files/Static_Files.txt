@@ -1,0 +1,45 @@
+<Static Files> - 정적파일
+ 서버 측에서 변경되지 않고 고정적으로 제공되는 파일 (이미지, JS, CSS 파일 등)
+ 정적 파일을 제공하기 위해서는 경로(URL)가 있어야 함 (서버의 기본동작은 요청에 대한 응답이기 때문)
+ (서버는 요청받은 URL 서버에 존재하는 정적 자원을 제공함)
+
+ -Static Files 경로
+  - 기본 경로
+    app폴더/static/
+
+    static files 경로는 DTL의 static tag를 사용해야 함
+    load tag를 사용해 import 후 사용 가능
+    [참고]
+     1. !! 절대경로 상대경로를 이용해 경로를 제대로 잘써도 static 태그를 사용하지 않으면
+        static files는 못불러옴 !!
+     2. 서버를 켠 상태로 static file을 작성하면 반영이 안되는 경우도 있으니 서버를 끄고 하자
+     3. load static은 extends 아래에 써야한다. (extends는 무조건 제일 위로)
+     4. base.html에 load static 하더라도 자식 페이지에는 상속안된다. 각 페이지마다 해줘야한다.
+
+    STATIC_URL
+     기본 경로 및 추가 경로에 위치한 정적 파일을 참조하기 위한 URL
+     (실제 파일이나 디렉토리 경로가 아니며, URL로만 존재)
+
+     settings.py에 STATIC_URL = 'static/' 해놓아야함.
+     
+     예제 기준 주소는 이렇게 나옴
+     URL(http://127.0.0.1:8000/) + STATIC_URL(static/) + 정적파일 경로(articles/sample-1.png)
+     (http://127.0.0.1:8000/static/articles/sample-1.png)
+  
+
+  - 추가 경로
+    최상단폴더에 static 폴더 만들고 settings 파일에 등록하면됨.
+
+    STATICFILES_DIRS에 문자열 값으로 추가 경로 설정 (settings.py에 설정)
+    STATICFILES_DIRS: 정적 파일의 기본 경로 외에 추가적인 경로 목록을 정의하는 리스트
+    
+    ```
+    STATICFILES_DIRS = [
+    BASE_DIR/ 'static',
+    ]
+    ```
+    예제 기준 주소는 이렇게 나옴
+    (http://127.0.0.1:8000/static/sample-2.png)
+
+
+ -> 정적 파일을 제공하려면 요청에 응답하기 위한 URL이 필요

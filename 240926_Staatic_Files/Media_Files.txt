@@ -1,0 +1,81 @@
+*) Static Files가 Media Files보다 큰 범주 (미디어파일은 정적파일 입니까? YES)
+
+<Media Files>
+ '사용자가 웹에서 업로드'하는 정적 파일 (user-uploaded)
+
+  Media Files을 제공하기 전 준비사항 (장고 공식문서에 나와 있음. 외울게 아니라고 함)
+  공식문서: https://docs.djangoproject.com/en/5.1/howto/static-files/
+  (목차: 'Serving files uploaded by a user during development' 이거 보면댐)
+  (MEDIA_URL, MEDIA_ROOT 작성해두고 공식문서에서 코드 복붙해서 쓰면된다.)
+
+   1. settings.py에 MEDIA_ROOT, MEDIA_URL 설정
+    - MEDIA_ROOT
+      미디어 파일들이 위치하는 디렉토리의 절대 경로
+      (EDIA_ROOT = BASE_DIR / 'media')
+
+    - MEDIA_URL
+      MEDIA_ROOT에서 제공되는 미디어 파일에 대한 주소를 생성
+      (STATIC_URL과 동일한 역할)
+      (MEDIA_URL = 'media/')
+
+   2. 작성한 MEDIA_ROOT와 MEDIA_URL에 대한 URL 지정
+    - 프로젝트의 urls.py에 등록해야함
+
+    - 업로드된 파일의 URL == setiings.MEDIA_URL
+    - MEDIA_URL을 통해 참조하는 파일의 실제 위치 == settings.MEDIA_ROOT
+
+<이미지 업로드>
+ - ImageField()
+  이미지 업로드에 사용하는 모델 필드
+  (이미지 객체가 직접 DB에 저장되는 것이 아닌 '이미지 파일의 경로' 문자열이 저장됨)
+  (ImageField를 사용하려면 반드시 Pillow 라이브러리가 필요)
+
+  1. blank=True 속성을 작성해 빈 문자열이 저장될 수 있도록 제약 조건 설정
+   (게시글 작성 시 이미지 업로드 없이도 작성할 수 있도록 하기 위함)
+   (models.py에 image = models.ImageField(black=True))
+
+  2. Pillow 라이브러리 install, migration 진행 
+    pip install pillow -> makemigrations -> migrate -> pip freeze > requirements.txt
+
+  3. form 요소의 enctype 속성 추가 (왜냐하면 기본적으로 form tag는 text만 보내게 설정되어 있어서 파일은 보내지 못함)
+  (<form action="{% url "articles:create" %}" method="POST" enctype="multipart/from-data"></form>)
+
+  4. ModelForm의 2번째 인자로 요청 받은 파일 데이터 작성 (views.py에 작성)
+   ModelForm의 상위 클래스 BaseModelForm의 생성자 함수 2번째 위치 인자로 파일을 받도록 설정되어 있음.
+   (form = ArticleForm(request.POST, request.FILES))
+
+
+<업로드 이미지 제공하기>
+ - 'url' 속성을 통해 업로드 파일의 경로 값을 얻을 수 있음
+ - article.image.url (업로드 파일의 경로)
+ - article.image (업로드 파일의 이름)
+
+ (<img src="{{ article.image.url }}" alt="image">)
+
+ 이미지를 업로드하지 않은 게시물은 detail 템플릿을 통해 렌더링 할 수 없음
+ if 문을 사용해 이미지 데이터가 있는 경우에만 이미지를 출력하게 처리
+
+
+<업로드 이미지 수정하기>
+ 수정 페이지 form 요소에 enctype 속성 추가
+ (<form action="{% url "articles:create" %}" method="POST" enctype="multipart/from-data"></form>)
+
+ update view 함수에서 업로드 파일에 대한 추가 코드 작성
+ (form = ArticleForm(request.POST, request.FILES, instance=article))
+ 
+
+ 참고
+  <미디어 파일 추가 경로>
+   ImageField()의 upload_to 속성을 사용해 다양한 추가 경로 설정
+    1. 기본 경로 설정 (upload_to='images/')
+    media폴더 안에 images 폴더를 만들고 거기에 업로드 하겠다. 라는 말
+
+    2. 업로드 날짜로 경로 설정 (upload_to='%Y/%m/%d/')
+    media 폴더 안에 년도 폴더 만들고 월 폴더만들고 일 폴더 만들고 거기에 업로드 하겠다
+    (media/2024/09/26/ 이 경로)
+
+    3. 함수 형식으로 경로 설정 (아직 안배운 부분을 써야해서 넘김)
+
+
+  <request.FILES가 두번째 위치 인자인 이유>
+   ModelForm의 상위 클래스 BaseModelForm의 생성자 함수 키워드 인자 참고해보면 data가 첫번째인자, files가 두번째인자인 것을 알 수 있음
