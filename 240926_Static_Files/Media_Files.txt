@@ -1,4 +1,4 @@
-*) Static Files가 Media Files보다 큰 범주 (미디어파일은 정적파일 입니까? YES)
+*) Static Files가 Media Files보다 큰 범주 (미디어파일은 정적파일 입니까? - YES)
 
 <Media Files>
  '사용자가 웹에서 업로드'하는 정적 파일 (user-uploaded)
