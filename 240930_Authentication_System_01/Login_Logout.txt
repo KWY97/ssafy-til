@@ -2,7 +2,7 @@
  로그인은 Session을 Create하는 과정
  
  - AuthenticationForm()
-  - 로그인 인증에 사용할 데이터를 입력 받는 built-in form
+  - 로그인 인증에 사용할 데이터를 입력 받는 built-in 'Form'
   *) 인증 수단으로만 쓰는 것이기 때문에 ModelForm이 아닌 !! Form !!
   *) 그렇다면 반대로 회원가입에서 쓰는 Form은 ModelForm이다.
 
