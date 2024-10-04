@@ -37,4 +37,18 @@
   - 암호 변경 시 세션 무효화를 막아주는 함수
   - 암호가 변경되면 새로운 password의 Session Data로 기존 session을 자동으로 갱신
 
+
+<is_authenticated 속성> (47p ~ 50p)
+ - is_authenticated
+  사용자가 인증 되었는지 여부를 알 수 있는 User model의 속성
+  모든 User 인스턴스에 대해 항상 True인 읽기 전용 속성
+  비인증 사용자에 대해서는 항상 False
+
+<인증된 사용자에 대한 접근 제한> (51p ~ 54p)
+ - login_required 
+  인증된 사용자에 대해서만 view 함수를 실행시키는 데코레이터
+  비인증 사용자의 경우 /accounts/login/ 주소로 redirect 시킴
+
+  인증된 사용자만 게시글을 작성/수정/삭제할 수 있도록 수정
+  인증된 사용자만 로그아웃/탈퇴/수정/비밀번호 변경할 수 있도록 수정
   

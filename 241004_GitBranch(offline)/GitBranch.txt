@@ -1,0 +1,31 @@
+<영화 pjt 역할 분배>
+1. movies 앱 담당 - 1명
+2. accounts 앱 담당 - 1명
+
+<Git Branch 수업 - offline>
+- Git Branch
+ 나뭇가지처럼 여러 갈래로 작업 공간을 나누어
+ 독립적으로 작업할 수 있도록 도와주는 GIT의 도구
+
+ 장점
+  - 독립된 개발 환경을 형성하기 때문에 원본(master)에 대해 안전
+  - 하나의 작업은 하나의 브랜치로 나누어 진행되므로 체계적으로 협업과 개발이 가능
+  - 손쉽게 브랜치를 생성하고 브랜치 사이를 이동할 수 있음
+
+
+ git branch <브랜치 이름>: 브랜치 생성
+ git branch: 브랜치 목록 확인
+ git branch -r: 원격 저장소의 브랜치 목록 확인
+ git bracnh <브랜치 이름>: 새로운 브랜치 생성
+ git branch -d <브랜치 이름>: 브랜치 삭제 (병합된 브랜치만 삭제 가능)
+ git branch -D <브랜치 이름>: 브랜치 삭제 (강제 삭제)
+
+ git switch <브랜치 이름>:  이동시키는 명령어
+ git switch -c <브랜치 이름>: 원격 저장소의 브랜치 목록 확인
+ git switch -c <브랜치 이름> <commit ID>: 새로운 브랜치 생성
+
+ branch에서 작업한 내용을 master에 적용하려면
+ !! branch 위치를 'master'로 해두고 !!
+ git merge <브랜치 이름>
+ 
+ :q 하면 나가짐
