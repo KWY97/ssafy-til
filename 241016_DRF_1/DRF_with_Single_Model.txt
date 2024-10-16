@@ -1,0 +1,26 @@
+<DRF with Single Model>
+ DRF(Django REST Framework)
+  Django에서 Restful API 서버를 쉽게 구축할 수 있도록 도와주는 오픈소스 라이브러리
+
+  DRF 사용을 위해서는 
+  !!!
+  pip install djangorestframework 을 해야하고
+  settings.py의 INSTALLED_APPS에 'rest_framework'을 적어줘야 한다.
+  !!!
+
+  Postman
+   - API 개발 및 테스트를 위한 서비스
+   - 요청 데이터 구성, 응답 확인, 환경 설정, 자동화 테스트 등 다양한 기능을 제공
+
+ 
+ [Serialization - 직렬화]
+  - 여러 시스템에서 활용하기 위해 데이터 구조나 객체 상태를 나중에 재구성할 수 있는 포맷으로 변환하는 과정
+
+  - Serializer
+   - Serialization을 진행하여 Serialized data를 반환해주는 클래스
+
+  - ModelSerializer
+   - Django 모델과 연결된 Serializer 클래스
+   -> 일반 Serializer와 달리 사용자 입력 데이터를 받아 자동으로 모델 필드에 맞추어 Serialization을 진행
+
+   - 사용 예시 (61p)
