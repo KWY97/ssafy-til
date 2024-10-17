@@ -1,0 +1,37 @@
+POST, 읽기 전용 필드 (19p ~ 20p)
+ fields에 작성된 필드는 모두 유효성 검사 목록에 포함됨
+ 그래서 serializer.save(article=article) 해도 에러가 뜸
+
+ - 우리가 원하는 것
+ 1. 외래 키 데이터는 유효성 검사에서는 제외해야함
+    (애초에 외래 키는 사용자에게 받는게 아니라 우리가 조회하고 넣는 것이라 유효성 검사가 필요없다.)
+
+ 2. 결과 데이터에는 포함하고 싶음
+
+ -> 읽기 전용 필드(read_only_fields)로 써야한다.
+ ```
+ class CommentSerializer(serializers.ModelSerializer):  
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        read_only_fields = ('article',)
+ ```
+
+<응답 데이터 재구성>
+ 기존 필드를 override 하게되면 Meta 클래스의 read_only_fields를 사용할 수 없음
+ 그래서 모델 시리얼라이저의 read_only 인자 값으로 재설정 해야함
+ ```
+ class CommentSerializer(serializers.ModelSerializer):
+    class ArticleTitleSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Article
+            fields = ('title',)
+
+    article =  ArticleTitleSerializer(read_only=True)
+        
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        # 요거 아래를 사용못함
+        # read_only_fields = ('article',)
+ ```
