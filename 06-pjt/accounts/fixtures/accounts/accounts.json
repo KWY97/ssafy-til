@@ -1,0 +1,78 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$aqK3padDEopisW86Y2G91O$jCTJAzfUwdRcTKNl6Se1/nWAlRfgjZ39QoIAuZM0HvE=",
+        "last_login": "2024-10-18T07:51:49.162Z",
+        "is_superuser": false,
+        "username": "하건수",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-10-18T07:51:48.852Z",
+        "nickname": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$Hv3hjaCgVjPLtXS5dggrAy$iLJjUmlZEgds3OEGm1UK3XNl1rEO4UJxU/B4i6w4dzo=",
+        "last_login": "2024-10-18T07:52:23.935Z",
+        "is_superuser": false,
+        "username": "김원겸",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-10-18T07:52:23.620Z",
+        "nickname": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$xEoQw7TCspxyP3pdKiFi8C$PNRp+4AGZUqv3OV2Q6bSw7Lg8FVMCVUKItqBZYiu6dk=",
+        "last_login": "2024-10-18T07:53:06.984Z",
+        "is_superuser": false,
+        "username": "김우영",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-10-18T07:53:06.668Z",
+        "nickname": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$jdCr0NqtTfjnPJ0dAA46zQ$XtMtAcIrbtpH8W3EUtRNmK7uPPrZVqGZmwHytc6Kxjs=",
+        "last_login": "2024-10-18T07:53:54.981Z",
+        "is_superuser": false,
+        "username": "도경원",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-10-18T07:53:54.661Z",
+        "nickname": "",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
