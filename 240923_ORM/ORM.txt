@@ -46,6 +46,12 @@ shell 환경이 있어야 Article.Object.all()을 바로바로 볼 수 있음
 python manage.py shell_plus 해주면 됨 (그 전에 django_extensions를 settings.py에 등록해야 댐)
 Django환경 안에서 실행되는 python shell (입력하는 QuerySet API 구문이 Django 프로젝트에 영향을 미침)
 
+*) shell_plus에서 화면 깨끗히 하려면 아래코드 입력하고 cls 입력
+```
+import os
+cls = lambda: os.system('cls')
+```
+
  - Create (23p ~ 28p)
   - 데이터 객체를 만드는 3가지 방법 (23p ~ 28p)
    1. 인스턴스만들고 인스턴스 변수활용하기 (23~25p)
