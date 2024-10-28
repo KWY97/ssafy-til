@@ -29,3 +29,14 @@
  git merge <브랜치 이름>
  
  :q 하면 나가짐
+
+
++) 깃 명령어
+mv 파일명 경로
+mv users.json accounts/fixtures
+
+
+ex) 한명이 dev라는 branch를 만들고 그 branch에서 작업을 하고 add, commit, push dev/ merge는 안함 
+    팀원이 clone 받으면 변화된 것은 없을 것임 (master에 merge 안해서)
+    clone 받은 팀원은 branch를 dev로 옮기고 git pull origin dev하면 dev에 있는 것이 pull됨
+    !!! merge할 때 master 말고 dev로 가게
