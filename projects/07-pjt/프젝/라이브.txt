@@ -1,0 +1,54 @@
+우리가 구현할 프로젝트의 핵심 주제: 추천 알고리즘
+
+오늘 프로젝트 - DRF 복습시간이라고 생각
+
+*) RSET Framework 가 정말 중요한 주제 중 하나임 - 강사님 피셜
+
+
+필수 요구사항
+ 1. DRF 사용 -> API 구현
+ 2. 데이터
+
+외부 API를 활용해서 데이터를 다운로드 받아 DB에 저장
+-> DB에 저장하는 이유
+ - DB에 저장하여 여러 번 외부로부터 데이터를 다운로드 받지 않도록 구성할 수 있다.
+ - 네트워크 연결이 불안정하거나 API 서비스가 일시적으로 중단된 경우에도 애플리케이션이 작동할 수 있다.
+
+API 잘되나 확인할 땐 POST맨 쓰면댐
+
+
+API_KEY 깃에 올리거나 그럴 때 보호하기 위해 환경변수이용
+ - .env 파일 생성
+ 1. 직접 read 하도록
+ 2. django-environ 라이브러리 사용
+ 3. .env에 API_KEY={내 api key}
+
+
+``` .env 파일을 BASE_DIR 위치 (manage.py랑 db.sqlite3 있는 쪽)에 만들고
+
+API_KEY=af85082d9a2f7d8adf86521515292b7d
+```
+!! 공백 있으면 안댐. 에러난다 !!
+
+
+``` settings.py 에 다가 BASE_DIR 아래에 (이건 필수는 아닌듯)
+
+import os
+import environ
+
+env = environ.Env(DEBUG=(bool, True))
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
+API_KEY = env('API_KEY') # .env 파일에 작성된 API_KEY 값을 변수에 대입
+```
+
+``` view.py 에다가
+from django.conf import settings
+
+api_key = settings.API_KEY // 기존엔 api_key = "af85082d9a2f7d8adf86521515292b7d" 였음
+```
+
+이렇게 외부에 노출되면 안되는 것은 .env에 작성하고 
++ (우리 기준으로) .gitignore에 작성하면된다
+
+
+fixtures 에 있는 json 데이터 활용해서 API server 구축

@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Orbit", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    background-color: #f8f9fa; /* 전체 배경 색상 */
+}
+
+/* Navbar 스타일 */
+.navbar {
+    margin-bottom: 0; /* Navbar와 섹션 사이에 여백 없애기 */
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    margin: 0 15px;
+    font-size: 1.1rem;
+}
+
+/* Frontpage 섹션 스타일 */
+.frontpage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #519eebad; /* Frontpage 배경 색상 */
+}
+
+.frontpage img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+/* 공통 섹션 스타일 */
+section {
+    padding: 20px;
+    margin: 0; /* 섹션 간 여백 없애기 */
+}
+
+/* 중앙 정렬 및 배경 색상 통일 */
+.intro, .skills, .projects, .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    text-align: center;
+    background-color: #f8f9fa; /* 동일한 배경 색상 */
+}
+
+/* Skills 섹션 스타일 */
+.skills {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.skills-title {
+    margin-bottom: 20px; /* 제목과 아이콘 사이의 간격 */
+}
+
+.skills-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.skills-icons i {
+    margin: 0 50px; /* 아이콘 간 간격 조정 */
+    color: #333; /* 아이콘 색상 (원하는 색상으로 변경 가능) */
+}
+
+/* Footer 스타일 */
+footer.fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    background-color: rgba(172, 255, 47, 0.63);
+    color: #333;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+#projects h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.project-item {
+    margin-bottom: 30px;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-img-top {
+    border-bottom: 4px solid #3498db;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.card-text {
+    color: #7f8c8d;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+/* Contact Section */
+#contact h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #bdc3c7;
+    padding: 15px;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+
+
+
+/* 미디어 쿼리 */
+@media (max-width: 768px) {
+    .intro, .skills, .projects, .contact {
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+    }
+}

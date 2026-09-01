@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block content %}
+<a href="{% url "movies:index" %}">[메인 페이지]</a>
+<hr>
+<h1>영화 상세 페이지</h1>
+<hr />
+<h3>영화 제목: {{ movie.title }}</h3>
+<br />
+{% if movie.img %}
+  <img src="{{ movie.img.url }}" alt="{{ movie.title }} 포스터" style="width: 300px; height: auto;">
+  <br>
+{% endif %}
+<br />
+<p>영화 내용: {{ movie.description }}</p>
+<br />
+<p>작성일: {{ movie.created_at|date:"Y-m-d H:i" }}</p>
+<p>수정일: {{ movie.updated_at|date:"Y-m-d H:i" }}</p>
+<hr>
+<a href="{% url "movies:update" movie.pk %}">[수정]</a>
+<a href="{% url "movies:delete" movie.pk %}">[삭제]</a>
+<hr>
+<a href="{% url "movies:index" %}">[뒤로 가기]</a>
+{% endblock content %}

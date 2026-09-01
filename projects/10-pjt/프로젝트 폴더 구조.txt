@@ -1,0 +1,84 @@
+back/
+│── manage.py
+│── requirements.txt
+│── pickflick/
+     │── __init__.py
+     │── asgi.py
+     │── settings.py
+     │── urls.py
+     │── wsgi.py
+│── articles/
+     │── migrations/
+     │── admin.py
+     │── __init__.py
+     │── apps.py
+     │── views.py
+     │── models.py
+     │── tests.py
+│── accounts/
+     │── migrations/
+     │── models.py
+     │── serializers.py
+     │── urls.py
+     │── views.py
+     │── admin.py
+     │── __init__.py
+     │── apps.py
+     │── signals.py
+     │── tests.py
+│── movies/
+     │── fixtures/
+         │── genres.json
+         │── movies.json
+         │── weathers.json
+     │── migrations/
+     │── __init__.py
+     │── admin.py
+     │── apps.py
+     │── models.py
+     │── serializers.py
+     │── tests.py
+     │── urls.py
+     │── views.py
+
+front/
+│── package-lock.json
+│── pickflick/
+      | ── .gitignore
+      | ── index.html
+      | ── jsconfig.json
+      | ── package-lock.json
+      | ── package.json
+      | ── README.md
+      | ── vite.config.js
+      | ── .vscode/
+          │── extensions.json
+     │── public/
+          │── favicon.io
+     │── src/
+          │── App.vue
+          │── main.js
+          │── assets/
+              │── p_logo.png
+              │── pickflick_logo.png
+          │── components/
+              │── HomeView/
+                   │── LatestAnimeList.vue
+                   │── LatestAnimeListItem.vue
+                   │── TopMovieList.vue
+                   │── TopMovieListItem.vue
+                   │── WeatherMovieList.vue
+                   │── WeatherMovieListItem.vue
+              │── PopularView/
+                   │── MovieList.vue
+                   │── MovieListItem.vue
+          │── router/
+              │── index.js
+          │── stores/
+              │── counter.js
+          │── views/
+              │── HomeView.vue
+              │── LoginSignupView.vue
+              │── LoginView.vue
+              │── PopularView.vue
+              │── SignupView.vue

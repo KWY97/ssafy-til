@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>DETAIL PAGE</h1>
+<hr>
+<h3>영화 제목: {{ movie.title }}</h3>
+<p>영화 내용: {{ movie.description }}</p>
+<hr>
+<a class="btn btn-secondary" href="{% url "movies:update" movie.pk%}" role="button">UPDATE</a>
+<a class="btn btn-danger" href="{% url "movies:delete" movie.pk%}" role="button">DELETE</a>
+<hr>
+<a class="btn btn-primary" href="{% url "movies:index" %}" role="button">BACK</a>
+{% endblock content %}

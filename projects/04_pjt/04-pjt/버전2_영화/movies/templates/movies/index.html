@@ -1,0 +1,13 @@
+{% extends "base.html" %} 
+{% block content %}
+<a href="{% url "movies:create" %}">[영화 등록하기]</a>
+<hr>
+<h1>메인 페이지</h1>
+<hr>
+{% for movie in movies %}
+  <p>영화 제목: {{ movie.title }}</p>
+  <p>영화 내용: {{ movie.description }}</p>
+  <a href="{% url "movies:detail" movie.pk %}">[상세 페이지]</a>
+  <hr>
+{% endfor %}
+{% endblock content %}
