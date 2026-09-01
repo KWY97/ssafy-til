@@ -7,7 +7,6 @@ SSAFY(삼성 청년 SW·AI 아카데미)에서 1학기동안 학습한 내용을
 ## 📚 Contents
 
 - **Web** - HTML, CSS
-- **Database** - SQL, Database
 - **Django** - Django
 - **JavaScript** - JavaScript
 - **Algorithm** - 알고리즘 및 문제 풀이
