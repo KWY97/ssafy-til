@@ -1,0 +1,55 @@
+ <CSS box model>
+  웹 페이지의 모든 HTML 요소를 감싸는 사각형 상자 모델
+  내용(content), 안쪽 여백(padding), 테두리(border), 외부 간격(margin)으로 구성되어 요소의 크기와 배치를 결정
+  
+- 박스 구성요소 4가지
+  - content box
+    실제 콘텐츠가 표시되는 영역 크기
+    width 및 height 속성을 사용하여 크기 조정
+
+  - padding box
+    콘텐츠 주위의 공백
+    padding 관련 속성을 사용하여 크기 조정
+
+  - border box
+    콘텐츠와 패딩을 래핑
+    border 관련 속성을 사용하여 크기 조정
+
+  - margin box
+    콘텐츠, 패딩, 테두리를 래핑
+    박스와 다른 요소 사이의 공백
+    margin 관련 속성을 사용하여 크기 조정
+
+*) border 속성
+  - solid: 실선
+  - dashed: 대쉬
+  - dotted: 점선
+
+- shorthand 속성
+  - border
+    width style color를 한번에
+
+  - margin & padding
+    4방향의 속성을 각각 지정하지 않고 한번에 지정할 수 있는 속성
+    4개 - 상우하좌
+    3개 - 상/좌우/하
+    2개 - 상하/좌우
+    1개 - 공통
+
+
+- box-sizing 속성 (!!시험 나올 삘!!)
+표준 상자 모델에서 width와 height 속성 값을 설정하면 이 값은 !!content box!!의 크기를 조정하게 됨
+그렇기 때문에 테두리를 기준으로 width와 height를 설정하게 하려면 따로 box-sizing을 border-box로 선언해줘야함
+(기본값은 box-sizing: content-box임)
+
+기타 display 속성
+1. inline-block
+ inline(너비 높이 조절 불가한 단점)과 block 요소 사이의 중간 지점을 제공하는 display 값
+ width 및 height 속성 사용 가능 (블록 특징)
+ padding, margin, border로 인해 다른 요소가 상자에서 밀려남 (블록 특징)
+ 새로운 행으로 넘어가지 않음 (인라인 특징)
+
+ -> 요소가 줄 바꿈이 되는 것을 원하지 않으면서 너비와 높이를 적용하고 싶은 경우에 사용
+
+2. none
+ 요소를 화면에 표시하지 않고, 공간조차 부여되지 않음
