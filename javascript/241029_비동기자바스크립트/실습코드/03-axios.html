@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // 1.
+    const promiseObj = axios({
+      method: 'get',
+      url: 'https://api.thecatapi.com/v1/images/search'
+    })
+
+    console.log(promiseObj) // Promise object
+
+    promiseObj
+      .then((response) => {
+        console.log(response) // response는 응답 결과 (이름은 마음대로 지정해도 됨)
+      })
+      .catch((error) => {
+        console.log(error) // error은 에러 (이름은 마음대로 지정해도 됨)
+      })
+    
+    console.log("안녕하세요")
+
+    // 2.
+    axios({
+      method: 'get',
+      url: 'https://api.thecatapi.com/v1/images/search'
+    })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error) // error은 에러 (이름은 마음대로 지정해도 됨)
+      })
+
+
+
+  </script>
+
+</body>
+
+</html>

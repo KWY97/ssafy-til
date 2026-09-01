@@ -1,0 +1,71 @@
+JSON (JavaScript Object Notation)
+ - Key-Value 형태로 이루어진 자료 표기법
+ - JavaScript의 Object와 유사한 구조를 가지고 있지만 JSON은 형식이 있는 "문자열"
+   (파이썬에서 dict나 list로 바꿔서 사용했음)
+
+ - So, JavaScript에서 JSON을 사용하기 위해서는 Object 자료형으로 변경해야함
+
+ Object <-> JSON 변환하기
+
+ ```
+ const jsObject = {
+ coffee: 'Americano',
+ iceCream: 'Cookie and cream'
+ }
+
+ // Object -> JSON
+ const objToJson = JSON.stringify(jsObject)
+ console.log(objToJson)  // {"coffee":"Americano","iceCream":"Cookie and cream"}
+ console.log(typeof objToJson)  // string
+
+ // JSON -> Object
+ const jsonToObj = JSON.parse(objToJson)
+ console.log(jsonToObj)  // { coffee: 'Americano', iceCream: 'Cookie and cream' }
+ console.log(typeof jsonToObj)  // object
+ ```
+
+
+[참고]
+클래스
+ - '객체'를 생성하기 위한 템플릿
+ - 객체의 속성, 메서드를 정의하는 청사진 역할
+
+ - 클래스의 필요성
+  - JS에서 객체를 하나 생성한다고 한다면?
+   - 하나의 객체를 선언하여 생성
+
+  - 동일한 형태의 객체를 또 만든다면?
+   - 또 다른 객체를 선언하여 생성해야함
+
+  -> 이런 불편함을 해결하기 위해 클래스 사용
+
+  클래스 기본 문법
+   1. class 키워드
+   2. 클래스 이름
+   3. 생성자 메서드
+    - constructor()
+
+  ```
+  class Member {
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+      }
+  sayHi() {
+      console.log(`Hi, I am ${this.name}`)
+      }
+     }
+
+  const member1 = new Member('Alice', 20)
+
+  console.log(member1) // Member { name: 'Alice', age: 20 }
+  console.log(member1.name) // Alice
+  member1.sayHi() // Hi I am Alice
+  ```
+
+  'new' 연산자
+   - 클래스나 생성자 함수를 사용하여 새로운 객체를 생성
+   - 특징
+    - 클래스의 constructor()는 new 연산자에 의해 자동으로 호출되며 특별한 절차 없이 객체를 초기화할 수 있음
+    - new 없이 클래스를 호출하면 TypeError 발생
+   

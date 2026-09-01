@@ -1,0 +1,107 @@
+<객체>
+ Object - 키로 구분된 데이터 집합을 저장하는 자료형
+
+ 구조 및 속성
+  객체 구조
+   - 중괄호 ('{}')를 이용해 작성
+   - 중괄호 안에는 key: value 쌍으로 구성된 속성(property)를 여러 개 작성 가능
+   - key는 문자형만 허용
+   - value는 모든 자료형 허용
+
+  속성 참조
+   - 점('.') 또는 대괄호('[]')로 객체 요소 접근
+   - key 이름에 띄어쓰기 같은 구분자가 있으면 대괄호 접근만 가능
+
+   in 연산자
+    - 속성이 객체에 존재하는지 여부를 확인
+
+    ```
+    const user = {
+      name: 'Alice',
+      'key with space': true,
+      greeting: function () {
+        return 'hello'
+      }
+    }
+
+    // 조회
+    console.log(user.name) // Alice
+    console.log(user['key with space']) // true
+
+    // 추가
+    user.address = 'korea'
+    console.log(user) // {name: 'Alice', key with space: true, address: 'korea', greeting: ƒ}
+
+    // 수정
+    user.name = 'Bella'
+    console.log(user.name) // Bella
+
+    // 삭제
+    delete user.name
+    console.log(user) // {key with space: true, address: 'korea', greeting: ƒ}
+
+    // in 연산자
+    console.log('greeting' in user) // true
+    console.log('country' in user) // false
+    ```
+
+  메서드
+   객체 속성에 정의된 함수
+   -> 'this' 키워드를 사용해 객체에 대한 특정한 작업을 수행할 수 있음
+
+   'this' keyword
+    함수나 메서드를 호출한 객체를 가리키는 키워드
+    -> 함수 내에서 객체의 속성 및 메서드에 접근하기 위해 사용
+
+     
+
+    ```
+    const person = {
+      name: 'Alice',
+      greeting: function () {
+        return `Hello my name is ${this.name}`
+       },
+    }
+
+    console.log(person.greeting()) // Hello my name is Alice
+    ```
+
+    위 예시를 보면 this는 greeting을 호출한 person을 가르키는 것임
+
+    그런데 ! ! !
+    JavaScript에서 this는 함수를 "호출하는 방법"에 따라 가리키는 대상이 다름
+    
+    단순 호출: this의 대상은 전역 객체
+    ```
+    const myFunc = function () {
+        return this
+    }
+
+    console.log(myFunce()) -> window (window는 자바스크립트의 전역객체(브라우저의 최상위 객체, DOM할 때 배운 document 객체보다 더 위에 있음))
+    ```
+
+    메서드 호출: this의 대상은 메서드를 호출한 객체
+    (위 예시는 메서드 호출의 경우)
+
+   - 중첩된 함수에서의 this 문제점과 해결책
+    - 화살표 함수 사용하기
+
+   - JavaScript 'this' 정리
+    - JavaScript의 함수는 '호출'될 때 this를 암묵적으로 전달 받음
+      (!!! 호출하지 않으면 this는 누군지 모른다 !!!)
+      (메서드로 호출되냐 일반함수로 호출되냐 봐야함.)
+      
+    - JavaScript에서 this는 함수가 "호출되는 방식"에 따라 결정되는 현재 객체를 나타냄
+    - Python의 self와 Java의 this가 선언 시 이미 값이 정해지는 것에 비해
+
+      JavaScript의 this는 함수가 호출되기 전까지 값이 할당되지 않고 호출 시에 결정됨 (동적 할당)
+
+    - this가 미리 정해지지 않고 호출 방식에 의해 결정되는 것은
+
+    - 장점
+     - 함수(메서드)를 하나만 만들어 여러 객체에서 재사용할 수 있다는 것
+
+    - 단점
+     - 이런 유연함이 실수로 이어질 수 있다는 것
+
+    -> 개발자는 this의 동작 방식을 충분히 이해하고 장점을 취하면서 실수를 피하는 것에 집중 

@@ -1,0 +1,262 @@
+<함수 - Function>
+ '참조 자료형'에 속하며 모든 함수는 Function object
+ 참조 자료형 - 객체의 주소가 저장되는 자료형 (가변, 주소가 복사)
+
+ - 구조
+  - function의 키워드
+  - 함수의 이름
+  - 함수의 매개변수
+  - 함수의 body를 구성하는 statements
+  -> return 값이 없다면 undefined를 반환
+
+  ```
+  function name ([param,[, parm, [..., param]]]) {
+    statements
+    return value
+  }
+  ```
+
+ - 함수 정의 2가지 방법
+  1. 선언식
+   ```
+   fucntion funcName () {
+    statements
+   }
+
+   - 특징 (3p 예시)
+    - 호이스팅 됨 (선언이 끌어올려 진다) -> so, 코드의 구조적인 측면에서는 권장되지 않음 (호이스팅 일어나니까.)
+    - 코드의 구조와 가독성 면에서는 표현식에 비해 장점이 있음
+
+
+  2. 표현식 - 함수를 변수에 할당하는 개념으로 사용하는 것 (그래서 함수의 이름이 없음)
+  ```
+  const funcName = fucntion () {
+    statements
+  }
+  ```
+
+  - 특징 (4p 예시) 
+   - 호이스팅 되지 않음 -> so, 표현식을 쓰는 것을 더 권장
+    - 변수 선언만 호이스팅 되고 함수 할당을 실행 시점에 이루어짐
+   - 함수 이름이 없는 '익명 함수'를 사용할 수 있음
+
+  - 함수 표현식 사용을 권장하는 이유
+   1. 예측 가능성
+    - 호이스팅의 영향을 받지 않아 코드의 실행 흐름을 더 명확하게 예측할 수 있음
+
+   2. 유연성
+    - 변수에 할당되므로 함수를 값으로 다루기 쉬움
+
+   3. 스코프 관리
+    - 블록 스코프를 가지는 let이나 const와 함께 사용하여 더 엄격한 스코프 관리가 가능
+
+  *) 표현식에도 함수이름을 쓸 수는 있으나 실제 사용에는 변수이름으로 써야한다.
+     함수이름 쓰는 경우는 디버깅 때 정도.
+
+ - 매개변수 정의 방법
+  1. 기본 함수 매개변수
+   - 전달하는 인자가 없거나 undefined가 전달될 경우 이름 붙은 매개변수를 기본값으로 초기화
+   ```
+       const greeting = function (name = 'Anonymous') {
+      return `Hi ${name}`
+    }
+    console.log(greeting()) -> Hi Anonymous
+   ```
+
+  2. 나머지 매개변수
+   - 임의의 수의 인자를 !!! '배열' !!! 로 허용하여 가변 인자를 나타내는 방법
+   - 작성 규칙
+    - 함수 정의 시 나머지 매개변수는 '하나만' 작성할 수 있음
+    - 나머지 매개변수는 함수 정의에서 매개변수 마지막에 위치해야 함
+    
+    ```
+    const myFunc = function (params1, params2, ...restParams) {
+      return [params1, params2, restParams]
+    }
+    console.log(myFunc(1, 2, 3, 4, 5)) -> [1, 2, [3, 4, 5]]
+    console.log(myFunc(1, 2)) -> [1, 2, []]
+    ```
+
+ - 매개변수와 인자 개수가 불일치 할 때
+  1. 매개변수 개수 > 인자 개수
+   - 누락된 인자는 'undefined'로 할당
+   - !! 에러를 발생시키지 않는다 !!
+
+   ```
+   const threeArgs = function (num1, num2, num3) {
+      return [num1, num2, num3]
+   }
+   console.log(threeArgs()) -> [undefined, undefined, undefined]
+   console.log(threeArgs(1)) -> [1, undefined, undefined]
+   console.log(threeArgs(1, 2)) -> [1, 2, undefined]
+   ```
+
+  2. 매개변수 개수 < 인자 개수
+   - 초과 입력한 인자는 사용하지 않음 (== 초과 입력한 인자는 무시한다.)
+   - !! 에러를 발생시키지 않는다 !!
+
+   ```
+    const noArgs = function () {
+      return 0
+    }
+    console.log(noArgs(1, 2, 3)) -> 0
+    ```
+
+    ```
+    const twoArgs = function (num1, num2) {
+      return [num1, num2]
+    }
+    console.log(twoArgs(1, 2, 3, 4)) -> [1, 2]
+    ```
+
+ - Spread syntax ('...' - 전개구문)
+  - 배열이나 문자열과 같이 반복 가능한 항목을 펼치는 것 
+  - 전개 대상에 따라 역할이 다름
+   - 배열이나 객체의 요소를 개별적인 값으로 분리하거나
+     다른 배열이나 객체의 요소를 현재 배열이나 객체에 추가하는 등
+
+  - 전개 구문 활용처
+   1. 함수와의 사용 (오늘 배우는 것)
+    1. 함수 호출 시 인자 확장
+    2. 나머지 매개변수 (압축) -> (위에서 '...restParams' 로 쓴게 예시임)
+
+   2. 객체와의 사용 (나중에 배움)
+   3. 배열과의 활용 (나중에 배움)
+
+  - 전개 구문 활용 
+   - 함수와의 사용 (오늘 배우는 것)
+    1. 인자 확장 (함수 호출 시)
+    ```
+    let numbers = [1, 2, 3]
+    let numbers2 = [1, 2]
+    function myFunc(x, y, z) {
+      return x + y + z
+    }
+    // console.log(myFunc(numbers[0], numbers[1], numbers[2])) // 원래는 이렇게 해야하는데
+    console.log(myFunc(...numbers))
+    console.log(myFunc(...numbers2)) -> 1 + 2 + undefined 라서 NaN (Not a number)이 뜨는 것
+    ```
+
+    2. 나머지 매개변수 (함수 선언 시)
+    ```
+    const myFunc2 = function (a1, a2, ...restParams) {
+      return [a1, a2, restParams]
+    }
+    console.log(myFunc2(1, 2, 3, 4, 5)) -> [1, 2, [3, 4, 5]]
+    console.log(myFunc2(1, 2)) -> [1, 2, []]
+    ```
+
+
+ - !!! 화살표 함수 표현식 !!!
+  - 함수 표현식의 간결한 표현법
+  *) 앞으로 계속해서 쓰게 될 것이니 아주 잘 익혀야 한다.
+
+  ``` 일반 표현식
+  const arrow = fucntion (name) {
+    return `hello, ${name}`
+  }
+  ```
+
+  ``` 화살표 함수 표현식 (3단계 과정 다 거친 것)
+  const arrow = name => `hello, ${name}`
+  ```
+
+  - 화살표 함수 작성 과정
+   원래함수
+   ```
+   const arrow1 = fucntion (name) {
+    return `hello, ${name}`
+   }
+   ```
+
+   1. function 키워드 제거 후 매개변수와 중괄호 사이에 화살표(=>) 작성
+   ```
+   const arrow2 = (name) => { return `hello, ${name}` }
+   ```
+
+   2. 함수의 매개변수가 하나 뿐이라면 매개변수의 '()' 제거 가능 (단, 생략하지 않는 것을 권장, 코드의 명시성(가독성) 때문에)
+   ```
+   const arrow3 = name => { return `hello, ${name}` } 
+   ```
+
+   3. 함수 본문의 표현식이 한 줄이라면, '{}'와 'return' 제거 가능
+   ```
+   const arrow4 = name => `hello, ${name}`
+   ```
+
+   *) 2단계, 3단계는 조건이 있어서 못하는 경우가 대부분이다.
+      우리는 1단계 까지만 줄일 것이다.
+
+      하지만 다른 사람 코드도 볼 수 있어야 하기에 2단계, 3단계도 알긴 알아야한다.
+      화살표 함수를 왜 배우는지는 나중에 뒤에서 배운다.
+      
+      공부법: 원래 함수 -> 화살표 함수 단계별 과정 작성
+              그 후 역으로 작성
+
+<참고>
+ - 화살표 함수 심화
+  1. 인자가 없다면 () or _로 표시 가능 -> 이정도는 알아 두면 좋을 것이라고함
+  ```
+  const noArgs1 = () => 'No args'
+  const noArgs2 = _ => 'No args'
+  ```
+
+  2-1. object를 return 한다면 return을 명시적으로 작성해야함
+  ```
+  const returnObject1 = () => { return { key: 'value'} }
+  ```
+
+  2-2. return을 작성하지 않으려면 객체를 소괄호로 감싸야함
+  ```
+  const returnObject1 = () => ( {key: 'value'} )
+  ```
+
+*) 공부할 때 MDN 문서에서 예시코드 보고 작성해보는 식으로 하면 좋다.
+   MDN 문서에는 세미콜론(';') 붙어 있는데 우리는 안쓸 것이니 그건 무시해도 된다.
+
+  
+<과제 풀다가 추가 (hw_3_2)>
+ - 선언식을 화살표 함수로 바꾸려면 표현식으로 변환한 후 해야함
+ ```
+    /*
+      - 아래 celsiusToFahrenheit 함수는 섭씨 온도를 화씨 온도로 바꾸는 함수이다.
+      - 선언식으로 작성된 함수를 "화살표 함수"로 다시 작성하시오.
+    */
+    // 선언식 
+    function celsiusToFahrenheit (celsius) {
+      return celsius * 9/5 + 32
+    }
+
+    //  1단계 - 표현식으로 바꾸기
+    const celsiusToFahrenheit1 = function (celsius) {
+      return celsius * 9/5 + 32
+    }
+
+    // 2단계 - function 키워드 제거, 화살표 작성
+    const celsiusToFahrenheit2 = (celsius) => {
+      return celsius * 9/5 + 32
+    }
+
+    // 3단계 - 매개변수가 하나 뿐이라면 () 제거
+    const celsiusToFahrenheit3 = celsius => {
+      return celsius * 9/5 + 32
+    }
+
+    // 4단계 - 표현식이 한 줄이라면 {}와 return 제거
+    const celsiusToFahrenheit4 = celsius => celsius * 9/5 + 32
+ ```
+
+ - 표현식으로 바꾸는 이유 (by.GPT)
+  선언식 함수를 화살표 함수로 바꾸기 위해 꼭 표현식으로 바꿔야 하는 것은 아닙니다. 
+  하지만, 화살표 함수는 변수에 할당하는 방식으로만 사용될 수 있기 때문에, 
+  자연스럽게 표현식으로 바꾸는 것이 일반적인 방법입니다.
+
+  - 이유: 화살표 함수는 선언식으로 사용 불가
+   - 함수 선언식은 function 키워드를 사용하여 함수를 직접 정의하는 방식이지만, 
+     화살표 함수는 const, let, 또는 var와 같은 변수에 할당하는 함수 표현식 형태로만 사용할 수 있습니다.
+
+  - 왜 꼭 표현식이어야 하는가?
+   - 화살표 함수는 이름을 가지지 않는 익명 함수로 설계되었습니다. 
+     즉, 함수 자체를 정의할 때는 이름을 붙이지 않고, 변수를 사용해 할당하는 것이죠.
+     선언식 함수는 이름을 가지고 있지만, 화살표 함수는 익명 함수이기 때문에 
+     이름을 직접 붙이는 방식(선언식)은 불가능합니다.
