@@ -1,0 +1,44 @@
+*) 참고: DB에는 True, False가 없다. 그래서 1과 0으로 나타냄
+
+<Automatic admin interface>
+ - Django가 추가 설치 및 설정 없이 자동으로 제공하는 관리자 인터페이스
+   '데이터 확인 및 테스트' 등을 진행하는데 매우 유용
+
+1. admin 계정 생성
+ email은 선택사항이기 때문에 입력하지 않고 진행 가능
+ 비밀번호 입력 시 보안상 터미널에 출력되지 않으니 무시하고 입력 이어가기
+ (python manage.py createsuperuser)
+
+ *) 주의: 계정이라는 것은 data가 존재 해야하는데 migrations 를 안하면 
+          그 데이터가 저장될 테이블이 없는 것이기 때문에 계정을 만들 수가 없다.
+          고로, migrations 한 번은 하고 계정 만들어야댐
+
+
+관리자로 로그인하고 만들어놓은 models를 사용하려면 등록을 해야한다.
+models는 우리가 models.py에 작성한 곳이고 등록하는건 admin.py에 한다.
+
+등록방법
+admin.site.register(Article)
+(admin site에 등록한다. 고 생각하면 잘 외워짐. register는 메서드임)
+
+
+<참고>
+- 데이터 베이스 초기화 (교재 52p)
+ 1. migration 파일 삭제
+ 2. db.sqlite3 파일 삭제
+
+ (__init__.py, migrations 폴더 지우지 않도록 주의 !!!)
+
+
+- Migrations 기타 명령어
+ 1. python manage.py showmigrations
+  migrations 파일들이 migrate 됐는지 안됐는지 여부를 확인하는 명령어
+  [X] 표시(체크 표시라고 생각)가 있으면 nigrate가 완료되었음을 의미
+
+ 2. python manage.py sqlmigrate articles 0001
+  해당 migrations 파일이 SQL 언어(DB에서 사용하는 언어)로 어떻게
+  번역 되어 DB에 전달되는지 확인하는 명령어
+
+- SQLite
+ 데이터베이스 관리 시스템 중 하나이며 'Django의 기본 데이터베이스'로 사용됨
+ (파일로 존재하며 '가볍고' '호환성'이 좋음)

@@ -1,0 +1,29 @@
+<올바르게 404 응답하기>
+ Django shortcuts functions
+  - render()
+  - redirect()
+  - get_object_or_404()
+  - get_list_or_404()
+
+get은
+ 1. 조회한 객체가 없을 때 Doesnotexist 예외를 발생
+ 2. 조회한 객체가 2개 이상일때 Multiple... 예외를 발생
+ -> 서버는 예외가 발생하면 코드가 중단된다. -> 그렇기 때문에 사용자가 잘못해도 예외가 발생하면 500 에러가 뜬다.
+    그래서 예외일땐 404 에러가 뜨게 예외 처리를 해야한다.
+
+- get_object_or_404()
+ - 모델 manager objects에서 get()을 호출하지만, 해당 객체가 없을 땐 기존 Doesnotexist 예외 대신 Http404를 raise함
+ - 예시: article = Article.objects.get(pk=article_pk) 처럼 get 쓴거를
+         article = get_object_or_404(Article, pk=article_pk)로 변경
+
+- get_list_or_404()
+ - 모델 manager objects에서 filter()의 결과를 반환하고, 해당 객체 목록이 없을 땐 Http404를 raise함
+  - 예시: articles = Article.objects.all() 처럼 all 쓴거를
+          articles = get_list_or_404(Article)로 변경
+
+
+<복잡한 ORM 활용 시 권장 방식>
+ - Serializer는 기본적인 데이터 변환(직렬화)을 담당
+ -> !!! 그렇기 때문에 View 함수에서 복잡한 query나 로직을 진행하자 !!!  
+
+

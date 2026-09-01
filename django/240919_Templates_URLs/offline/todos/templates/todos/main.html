@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+<h1>MAIN PAGE</h1>
+<ul>
+  {% comment %} DTL -> 사용자에게 HTML을 '잘 표현'하기 위해 만들어졌다. 연산자가
+  + 밖에 없다. {% endcomment %} {% for todo in work %}
+  <li>{{todo}}</li>
+  {% empty %}
+  <li>아직 할 일이 없습니다.</li>
+  {% endfor %}
+</ul>
+{% endblock content %}

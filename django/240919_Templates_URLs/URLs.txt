@@ -1,0 +1,16 @@
+<URL dispatcher>
+ - URL 패턴을 정의하고 해당 패턴이 일치하는 요청을 처리할 view 함수를 연결(매핑)
+ 
+<Variable Routing >
+ - URL 일부에 변수를 포함시키는 것 (변수는 view 함수의 인자로 전달 할 수 있음)
+ - Variable Routing 이 많아지면 views에서 def 작성할 때 request 뒤에 순서대로 작성하면 됨.
+ 
+ - 작성법
+  <path_converter:variable_name>
+
+  path_converter: URL 변수의 타입을 지정 (str, int 등 5가지 타입 지원, 기본값은 str(생략가능))
+  variable_name: 변수이름
+
+!!! <App URL mapping> !!!
+ 각 앱에 URL을 정의하는 것
+ 프로젝트와 각 앱이 URL을 나누어 관리를 편하게 하기 위함

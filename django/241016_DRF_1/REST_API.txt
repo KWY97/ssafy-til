@@ -1,0 +1,86 @@
+<API>
+ API
+  두 소프트웨어가 서로 통신할 수 있게 하는 메커니즘
+  -> 클라이언트-서버처럼 서로 다른 프로그램에서 요청과 응답을 받을 수 있도록 만든 체계
+
+  "이렇게 요청을 보내면, 이렇게 정보를 제공해 줄 것이다."라는 메뉴얼
+  소프트웨어와 소프트웨어 간 "지정된 정의(형식)"으로 소통하는 수단 -> API
+
+ Web API
+  - 웹 서버 또는 웹 브라우저를 위한 API
+  
+  - 현대 웹 개발은 하나부터 열까지 직접 개발하기보다 여러 Open API들을 활용하는 추세
+  
+  - 대표적인 Third Party Open API 서비스 목록
+   - Youtube API
+   - Google Map API
+   - Naver Papago API
+   - Kakao Map API
+
+!! <REST API(Representational State Transfer)> !! - 오늘의 주제
+ API Server를 개발하기 위한 일종의 소프트웨어 설계 방법론 (규칙 X)
+ -> "API Server를 설계하는 구조가 서로 다르니 이렇게 맞춰서 설계하는게 어때?" 하는 방법론
+
+ *) RESTful API
+  - REST 원리를 따르는 시스템을 RESTful 하다고 부름
+  - "자원을 정의"하고 "자원에 대한 주소를 지정"하는 전반적인 방법을 서술
+
+  -> 각각 API 서버 구조를 작성하는 모습이 너무 다르니 어느정도 약속을 만들어서 다같이 통일해서 쓰자! 
+
+  즉, REST API: REST라는 설계 디자인 약속을 지켜 구현한 API
+
+
+<REST에서 자원을 정의하고 주소를 지정하는 방법>
+ 1. 자원의 "식별": URI (URL보다 좀 큰 상위 개념)
+ 2. 자원의 "행위": HTTP Methods
+ 3. 자원의 "표현": JSON 데이터(궁극적으로 표현되는 데이터 결과물)
+
+ [1. 자원의 식별]
+  URI(Unifrom Resource Identifier): 통합 자원 식별자
+   - 인터넷에서 리소스(자원)를 식별하는 문자열
+   - 가장 일반적인 URI는 웹 주소로 알려진 URL
+
+    *) URL(Unifrom Resource Locator): 통합 자원 위치
+        - 웹에서 주어진 리소스의 주소
+        -> 네트워크 상에 리소스가 어디 있는지를 알려주기 위한 약속
+
+        URL 구조 (23p ~ 29p)
+         Scheme, Domain Name, Port, Path, Parameters, Anchor(서버에 전송되지 않음, 브라우저에서 처리)
+
+ [2. 자원의 행위]
+  HTTP Request Methods
+   - 리소스에 대한 행위(수행하고자 하는 동작)를 정의
+   -> HTTP verbs 라고도함
+
+   대표적인 HTTP Request Methods
+    1. GET
+     - 서버에 리소스의 표현을 요청
+     - GET을 사용하는 요청은 데이터 검색(데이터 조회)만 해야함
+
+    2. POST
+     - 데이터를 지정된 리소스에 제출(데이터 생성)
+     - 서버의 상태를 변경
+
+    3. PUT
+     - 요청한 주소의 리소스를 수정
+
+    4. DELETE
+     - 지정된 리소스를 삭제
+
+   HTTP response status codes: 특정 HTTP 요청이 성공적으로 완료 되었는지 여부를 나타냄
+    5가지 응답 그룹으로 분류 (우리가 자주 보는 것은 아래 3가지)
+     200~299: 성공
+     400~499: 클라이언트 잘못으로 실패
+     500~599: 서버 잘못으로 실패
+
+ [3. 자원의 표현]
+  지금까지 우리는 rendr 함수로 페이지(html)만 응답했음
+  하지만 서버는 페이지 뿐만 아니라 다양한 데이터 타입 응답이 가능
+  'REST API'는 이 중에서도 'JSON 타입'으로 응답하는 것을 권장
+
+  JSON으로 응답을 하면 페이지를 어떻게 보는가?
+  -> Front-end-Framework가 클라이언트에게 페이지를 보여줌.
+     즉, Django는 더 이상 Template 부분에 대한 역할을 담당하지 않게 되며
+     Front-end와 Back-end가 분리되어 구성됨
+
+    json 데이터 응답 - (41p ~ 44p)

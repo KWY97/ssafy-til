@@ -1,0 +1,70 @@
+<Login>
+ 로그인은 Session을 Create하는 과정
+ 
+ - AuthenticationForm()
+  - 로그인 인증에 사용할 데이터를 입력 받는 built-in 'Form'
+  *) 인증 수단으로만 쓰는 것이기 때문에 ModelForm이 아닌 !! Form !!
+  *) 그렇다면 반대로 회원가입에서 쓰는 Form은 ModelForm이다.
+
+  Form과 ModelForm은 인자 순서가 다르다.
+  ModelForm의 첫 번째 인자는 Data이다.
+  하지만 Form의 첫 번째 인자는 request이다. 두 번째 인자가 Data이다.
+  (form = AuthenticationForm(request, request.POST) 이 순서로 적어야함)
+
+  - auth_login(request, form.get_user())
+    *) 이건 외워야함
+
+   - login(request, user)
+    - AuthenticationForm을 통해 인증된 사용자를 로그인 하는 함수
+   - get_user()
+    - 유효성 검사를 통과했을 경우 로그인한 사용자 객체를 반환
+
+  ```
+  from django.shortcuts import render
+  from django.contrib.auth.forms import AuthenticationForm
+  from django.contrib.auth import login as auth_login
+
+  def login(request):
+      if request.method == 'POST':
+          form = AuthenticationForm(request, request.POST)
+          if form.is_valid():
+              # 만약 인증된 사용자라면 로그인 진행 (세션 데이터 생성)
+              auth_login(request, form.get_user())
+              return redirect('articles:index')
+      else:
+         form = AuthenticationForm()
+      context = {
+          'form': form,
+      }
+      return render(request, 'accounts/login.html', context)
+  ```
+
+
+<Logout>
+ 로그아웃은 Session을 Delete하는 과정
+
+ - logout(request)
+  1. DB에서 현재 요청에 대한 'Session Data'를 삭제
+  2. 클라이언트의 쿠키에서도 'Session id'를 삭제
+ 
+  ```
+  def logout(request):
+    # 세션 데이터 삭제
+    auth_logout(request)
+    return redirect('articles:index')
+  ```
+
+
+<Template with Authentication data>
+ 템플릿에서 인증 관련 데이터를 출력하는 방법
+
+ {{ user.username }} 하면 username이 나옴.
+ context로 넘겨받지 않았는데 데이터를 사용할 수 있는 이유는?
+  - django가 미리 준비한 context 데이터가 존재하기 때문 (context processors)
+
+ - context processors (settings.py의 TEMPLATES의 django.contrib.auth.context.processors.auth)
+  - 템플릿이 렌더링될 때 호출 가능한 컨텍스트 데이터 목록
+  - 작성된 컨텍스트 데이터는 기본적으로 템플릿에서 사용 가능한 변수로 포함됨
+  - django에서 자주 사용하는 데이터 목록을 미리 템플릿에 로드해 둔 것
+
+  
