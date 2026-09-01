@@ -1,0 +1,95 @@
+<온라인>
+
+BFS (너비우선 탐색)
+ - 탐색 시작점의 인접한 정점들을 먼저 모두 차례로 방문한 후에, 방문했던 정점을 시작점으로 하여 다시 인접한 정점들을 차례로 방문하는 방식
+ - 인접한 정점들에 대해 탐색을 한 후, 차례로 다시 너비우선탐색을 진행해야 하므로, 선입선출 형태의 자료구조인 큐를 활용
+
+방식 1
+'''
+def BFS(G, v): # 그래프 G, 탐색 시작점 v
+    # 탐색 준비 단계
+    visited = [0] * (n+1) # n: 정점의 개수
+    queue = []
+    queue.append(v) # 시작점 v를 큐에 삽입, 시작점을 enqueue한 것
+
+    # 탐색 단계
+    while queue: # 큐가 비어있지 않은 동안
+        t = queue.pop(0) # 큐의 첫번째 원소 반환, t는 방문(처리)할 노드임, 방문할 노드 dequeue한 것
+        if not visited[t]: # 방문안한 곳이면, 조건문 1
+            visited[t] = True # 방문처리
+           # visit(t) # 정점 t에서 할 일
+           for i in G[t]: # t와 연결된 모든 정점에 대해
+               if not visited[i]: # i가 방문안한 곳이라면, 조건문 2
+                   queue.append(i) # 큐에 넣기
+'''
+
+방식 1에서 조건문이 2개 쓰인 이유는 64p 그림에서 C-F가 연결돼어 있다고 생각하면 됨 F가 두 있는 걸 볼 수 있음
+직접 Q에 넣고 빼는거 적어보면 바로 이해할 듯.
+
+아무튼 Q의 enqueue단계에서 중복을 방지하기 위해 아래 방식 2를 사용
+
+
+교재에는 이미 방문한 곳은 Q에 들어가지 않는데 G의 모양에 따라 방문한 곳도 들어갈 수 있다.
+(G가 단방향이면 안들어가고, 양방향이면 들어가는 것 같은데 직접 해보면 알 듯 - 해보기)
+그래서 17번 line에서 방문안한 곳인지 검사함.
+-> 그런데 만약에 Q의 사이즈가 정해진 경우에는 이미 방문한 곳도 Q에 들어가므로 사이즈가 초과 될수 있음.
+
+
+교재 64p 그림에서 B-C연결돼있는데 C는 A와는 간선1개로 연결돼 있고, B를 거친다면 A-B-C형태로 2개로 연결돼 있다.
+BFS는 가장 가깝게 인접한 것을 우선순위로 하므로 사실 B-C는 연결이 안된것이나 마찬가지이며 연결안된것과 똑같이 처리됨.
+
+
+방식 2
+'''
+def BFS(G, v): # 그래프 G, 탐색 시작점 v
+    # 탐색 준비 단계
+    visited = [0] * (n+1) # n: 정점의 개수
+    queue = []
+    queue.append(v) # 시작점 v를 큐에 삽입, 시작점을 enqueue한 것
+    visited[v] = 1 # 방문처리
+
+   # 탐색 단계
+   while queue: # 큐가 비어있지 않은 동안
+       t = queue.pop(0) # 큐의 첫번째 원소 반환, t는 방문(처리)할 노드임, 방문할 노드 dequeue한 것
+       # visit(t) # 정점 t에서 할 일
+       for i in G[t]: # t와 연결된 모든 정점에 대해
+           if not visited[i]: # i가 방문안한 곳이라면
+               queue.append(i) # 큐에 넣기
+               visited[i] = visited[t] + 1 # n으로부터 1만큼 이동
+'''
+
+
+방식 2 사용해서 실제 구현 한 것. 이 방법을 기본형으로 기억하면 문제풀기 편리하다고 함.
+'''
+def BFS(s, V): # 탐색 시작점 s, 마지막 정점 V
+    # 탐색 준비 단계
+    visited = [0] * (V+1) # n: 정점의 개수
+    queue = []
+    queue.append(s) # 시작점 v를 큐에 삽입, 시작점을 enqueue한 것
+    visited[s] = 1 # 방문처리
+
+    # 탐색 단계
+    while queue: # 큐가 비어있지 않은 동안
+        t = queue.pop(0) # 큐의 첫번째 원소 반환, t는 방문(처리)할 노드임, 방문할 노드 dequeue한 것
+        # 정점 t에서 할 일
+        print(t) # 나는 방문 확인
+        for i in adj_l[t]: # t와 연결된 모든 정점에 대해
+            if not visited[i]: # i가 방문안한 곳이라면
+                queue.append(i) # 큐에 넣기
+                visited[i] = visited[t] + 1 # n으로부터 1만큼 이동, 정점별로 탐색 순위가 나오니까 최단 거리나 최소 탐색에 사용하기 좋다.
+    print(visited)
+
+V, E = map(int, input().split())
+arr = list(map(int, input().split()))
+
+adj_l = [[] for _ in range(V+1)]
+for i in range(E):
+    v1, v2 = arr[i*2], arr[i*2+1]
+    adj_l[v1].append(v2)
+    adj_l[v2].append(v1) # 방향이 없을 때만 사용 (= 양방향일때)
+
+BFS(1, V)
+'''
+
+
+
